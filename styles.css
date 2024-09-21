@@ -7,6 +7,16 @@
   width: 55vw;
   max-width: 500px;
   max-height: 500px;
+  /* animation linking */
+  animation-name: wheel; /*linking this element to be animated*/
+  animation-duration: 10s; /*how long the animation duration*/
+  animation-iteration-count: infinite; /*how many iter*/
+  animation-timing-function: linear; /*acceleration of the animation, default value is "ease" start slowly and then accelerate overtime, linear is making the animation has consistant speed throughout the entire animation*/
+  /* The animation-name property is used to link a @keyframes rule to a CSS selector. The value of this property should match the name of the @keyframes rule. Give your .wheel selector an animation-name property set to wheel. The animation-duration property is used to set how long the animation should sequence to complete. The time should be specified in either seconds (s) or milliseconds (ms). Set your .wheel selector to have an animation-duration property of 10s. 
+  
+  The animation-iteration-count property sets how many times your animation should repeat. This can be set to a number, or to infinite to indefinitely repeat the animation. Your Ferris wheel should never stop, so set the .wheel selector to have an animation-iteration-count of infinite.
+
+  The animation-timing-function property sets how the animation should progress over time. There are a few different values for this property, but you want the Ferris wheel animation to run at the same rate from start to finish. Set the animation-timing-function to linear in your .wheel selector.*/
 }
 
 .line {
@@ -50,6 +60,10 @@
   transform-origin: 50% 0%; /*do the roration from the middle x-axis on top (so its like top-middle)*/
   transform: rotate(30deg);
   /* currently up until here every single cabin is stack on top of each other so the following code will reposition every single on of them */
+
+  /* animation */
+  animation: cabins 10s ease-in-out infinite; /*animation shorthand*/ 
+  /* To make your cabin animation seem more like a natural swinging motion, you can use the ease-in-out timing function. This setting will tell the animation to start and end at a slower pace, but move more quickly in the middle of the cycle. */
 }
 
 .cabin:nth-of-type(1) {
@@ -82,5 +96,37 @@
   top: 7%;
 }
 
+/* start of animation */
+@keyframes wheel {
+  /* The @keyframes at-rule is used to define the flow of a CSS animation. Within the @keyframes rule, you can create selectors for specific points in the animation sequence, such as 0% or 25%, or use from and to to define the start and end of the sequence. @keyframes rules require a name to be assigned to them, which you use in other rules to reference. For example, the @keyframes freeCodeCamp { } rule would be named freeCodeCamp. */
+  
+  0% { /*the percentage basically means at when will the exact animation happen from 0% (start) to 100% (finish)*/
+    /* You now need to define how your animation should start. To do this, create a 0% rule within your @keyframes wheel rule. The properties you set in this nested selector will apply at the beginning of your animation. */
+    transform: rotate(0deg); /*nothing happens yet*/
+  }
 
+  100% {
+    transform: rotate(360deg); /*go back to the same position as the starting of the animation*/
+  }
+}
+
+@keyframes cabins {
+  0% {
+     transform: rotate(0deg);
+     /* background-color: yellow; */
+     /* Because the animation is on an infinite loop and the start and end colors are not the same, the transition appears jerky when it switches back to yellow from red.To start fixing this, remove the background-color from your 0% selector. */
+   }
+   25% {
+    background-color: yellow;
+  }
+   50%{
+    background-color: purple;
+  }
+  75% {
+    background-color: yellow;
+  }
+   100% {
+     transform: rotate(-360deg);
+   }
+}
 
